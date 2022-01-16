@@ -1,7 +1,7 @@
 import logging
 import boto3
-from argparse import ArgumentParser
-from botocore.exceptions import ClientError
+from argparse import ArgumentParser, HelpFormatter
+from botocore.exceptions import ClientError, ProfileNotFound
 
 # from botocore.errorfactory import UnauthorizedException
 
@@ -11,19 +11,20 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s: %(levelname)s: %(message)s')
 
 # Argument parser config
-parser = ArgumentParser()
+formatter = lambda prog: HelpFormatter(prog,max_help_position=52)
+parser = ArgumentParser(formatter_class=formatter)
+# parser = ArgumentParser()
 parser.add_argument("-v", "--vpc", required=True, help="The VPC to annihilate")
 parser.add_argument("-r", "--region", default="us-east-1", help="AWS region that the VPC resides in")
 parser.add_argument("-d", "--dryrun", action='store_true', help="If exists, dry run all deletions.")
-parser.add_argument("-p", '--profile', help="AWS profile")
+parser.add_argument("-p", '--profile', default='default', help="AWS profile")
 args = parser.parse_args()
 
 # boto client config
 try:
     session = boto3.Session(profile_name=args.profile)
-except ClientError as e:
-    logger.warning("alon")
-    logger.warning(e.response['Error']['Message'])
+except ProfileNotFound as e:
+    logger.warning("{}, please provide a valid AWS profile name".format(e))
     exit(-1)
 
 vpc_client = session.client("ec2", region_name=args.region)
