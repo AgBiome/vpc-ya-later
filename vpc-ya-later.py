@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s: %(levelname)s: %(message)s')
 
 # Argument parser config
-formatter = lambda prog: HelpFormatter(prog,max_help_position=52)
+formatter = lambda prog: HelpFormatter(prog, max_help_position=52)
 parser = ArgumentParser(formatter_class=formatter)
 # parser = ArgumentParser()
 parser.add_argument("-v", "--vpc", required=True, help="The VPC to annihilate")
@@ -33,6 +33,7 @@ elb_client = session.client('elb', region_name=args.region)
 lambda_client = session.client('lambda', region_name=args.region)
 eks_client = session.client('eks', region_name=args.region)
 asg_client = session.client('autoscaling', region_name=args.region)
+rds_client = session.client('rds', region_name=args.region)
 
 ec2 = session.resource('ec2', region_name=args.region)
 
@@ -154,6 +155,33 @@ def delete_lambdas():
             continue
         try:
             lambda_client.delete_function(FunctionName=lmbda)
+        except ClientError as e:
+            logger.info(e.response['Error']['Message'])
+
+    logger.info("--------------------------------------------")
+    return
+
+
+def delete_rdss():
+    waiter = rds_client.get_waiter('db_instance_deleted')
+    rdss = rds_client.describe_db_instances()['DBInstances']
+
+    rdsss_list = [rds['DBInstanceIdentifier'] for rds in rdss if rds['DBSubnetGroup']['VpcId'] == vpc_id]
+
+    logger.info("RDSs in VPC {}:".format(vpc_id))
+    for rds in rdsss_list:
+        logger.info("Deleting {}...".format(rds))
+        # Did not find DryRun param for the below method
+        if dry_run:
+            logger.info("DryRun flag is set, skipping {}...".format(rds))
+            continue
+        try:
+            rds_client.modify_db_instance(DBInstanceIdentifier=rds, DeletionProtection=False)
+            rds_client.delete_db_instance(
+                DBInstanceIdentifier=rds,
+                SkipFinalSnapshot=True,
+                DeleteAutomatedBackups=True)
+            waiter.wait(DBInstanceIdentifier=rds)
         except ClientError as e:
             logger.info(e.response['Error']['Message'])
 
@@ -424,6 +452,7 @@ if __name__ == '__main__':
     if vpc_in_region():
         delete_ekss()
         delete_asgs()
+        delete_rdss()
         delete_ec2s()
         delete_lambdas()
         delete_elbs()
@@ -432,10 +461,10 @@ if __name__ == '__main__':
         delete_vpc_epts()
         delete_igws()
         delete_enis()
-        delete_subnets()
         delete_sgs()
         delete_rtbs()
         delete_acls()
+        delete_subnets()
         delete_vpc()
     else:
-        logger.info("The given VPC was not find in {}".format(args.region))
+        logger.info("The given VPC was not found in {}".format(args.region))

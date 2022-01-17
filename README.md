@@ -23,3 +23,26 @@ optional arguments:
 ```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+## Important, please read !!!
+
+The script will try to delete every resource within the VPC. Please use with caution.
+
+Resources that can be deleted:
+
+* EC2
+* EKS
+* ASG
+* Lambda
+* RDS
+* ELB
+* ELBv2
+* NAT
+* VPC Endpoint
+* VPC IGW
+* ENI
+* Routing tables
+* Security groups
+* ACLs
+* VPC
+
