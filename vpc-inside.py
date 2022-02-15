@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO,
 formatter = lambda prog: HelpFormatter(prog, max_help_position=52)
 parser = ArgumentParser(formatter_class=formatter)
 # parser = ArgumentParser()
-parser.add_argument("-v", "--vpc", required=True, help="The VPC to annihilate")
+parser.add_argument("-v", "--vpc", required=True, help="The VPC to describe")
 parser.add_argument("-r", "--region", default="us-east-1", help="AWS region that the VPC resides in")
 parser.add_argument("-p", '--profile', default='default', help="AWS profile")
 args = parser.parse_args()
@@ -193,7 +193,7 @@ def describe_enis():
 
 def describe_igws():
     """
-  Detach and delete the internet gateway
+  Describe the internet gateway
   """
 
     # Get list of dicts
