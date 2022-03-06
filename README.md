@@ -40,6 +40,7 @@ Resources that can be deleted:
 * NAT
 * VPC Endpoint
 * VPC IGW
+* VPC VPGW
 * ENI
 * Routing tables
 * Security groups

@@ -325,6 +325,38 @@ def delete_igws():
     return
 
 
+def delete_vpgws():
+    """
+  Detach and delete the virtual private gateways
+  """
+
+    # Get list of dicts
+    vpgws = vpc_client.describe_vpn_gateways(
+        Filters=[{"Name": "attachment.vpc-id",
+                  "Values": [vpc_id]}])['VpnGateways']
+
+    # Get a list of enis
+    vpgws = [vpgw['VpnGatewayId'] for vpgw in vpgws]
+
+    logger.info("VPGWs in VPC {}:".format(vpc_id))
+    for vpgw in vpgws:
+        logger.info(vpgw)
+        try:
+            logger.info("Detaching...")
+            vpc_client.detach_vpn_gateway(VpnGatewayId=vpgw, VpcId=vpc_id, DryRun=dry_run)
+        except ClientError as e:
+            logger.info(e.response['Error']['Message'])
+
+        try:
+            logger.info("Deleting...")
+            vpc_client.delete_vpn_gateway(VpnGatewayId=vpgw, DryRun=dry_run)
+        except ClientError as e:
+            logger.info(e.response['Error']['Message'])
+
+    logger.info("--------------------------------------------")
+    return
+
+
 def delete_subnets():
     # Get list of dicts of metadata
     subnets = vpc_client.describe_subnets(Filters=[{"Name": "vpc-id",
@@ -457,14 +489,15 @@ if __name__ == '__main__':
         delete_lambdas()
         delete_elbs()
         delete_elbsV2()
-        delete_nats()
         delete_vpc_epts()
-        delete_igws()
+        delete_nats()
         delete_enis()
         delete_sgs()
-        delete_rtbs()
         delete_acls()
         delete_subnets()
+        delete_igws()
+        delete_vpgws()
+        delete_rtbs()
         delete_vpc()
     else:
         logger.info("The given VPC was not found in {}".format(args.region))

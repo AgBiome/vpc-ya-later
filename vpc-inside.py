@@ -211,6 +211,26 @@ def describe_igws():
     return
 
 
+def describe_vpgws():
+    """
+  Describe the virtual private gateway
+  """
+
+    # Get list of dicts
+    vpgws = vpc_client.describe_vpn_gateways(
+        Filters=[{"Name": "attachment.vpc-id",
+                  "Values": [vpc_id]}])['VpnGateways']
+
+    vpgws = [vpgw['VpnGatewayId'] for vpgw in vpgws]
+
+    logger.info("VPGWs in VPC {}:".format(vpc_id))
+    for vpgw in vpgws:
+        logger.info(vpgw)
+
+    logger.info("--------------------------------------------")
+    return
+
+
 def describe_subnets():
     # Get list of dicts of metadata
     subnets = vpc_client.describe_subnets(Filters=[{"Name": "vpc-id",
@@ -298,6 +318,7 @@ if __name__ == '__main__':
         describe_nats()
         describe_vpc_epts()
         describe_igws()
+        describe_vpgws()
         describe_enis()
         describe_sgs()
         describe_rtbs()
