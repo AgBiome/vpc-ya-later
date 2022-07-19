@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "alon-lavian",
+  "private_key_id": "73406a52771c26be3273750c5fb44a27e7afe4aa",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDB5Wp3bm3yvl+s\n37SE1vaol/dZKtQJ4JIIDB4f/qmqH8TF9pDZ3pJuKzh4LhoJsA+cD33J6UxOnp6G\nb7byG+61g/FJJXKkbLa309uHIofVtnA70fT6Ljbd1hXyE35F3DkGZ3aCp/LEXeEZ\nyPWAtspmpNO8gSB0fEY57GB/+yTE7ReJIM4d/ve6GCWnpPgDQOY8HMWhFFhDvCtv\nVgR1fQCIpd/Nl/NDbxspKiQH2qUlmTpiFB82qer4S1iHnDOy2aaVivmrRdICv3Rn\nyNJrBAfN94LV/HC6O3dWU6yPa/x0ObcAchOcnVvMMD/4Ej/VmXKXh4IadvZWCmQV\n0dIHQW1xAgMBAAECggEAGQ7CbxPU3rGOoMM6S46SSuB0xU+9Hleo16RlQkJBf+xi\nHClMt/NFHjq0rgdbMxRPOB5iZbUiOOjT2NDYJjrI4yldhdPymGA6TtBwxuqF/m74\n2yo7jBdr3Mhdhq7RO0sGDZdSX/k/bPQq8o+fdpZo2tIDURGo9ZTX6IVtRSzaKB63\n8SI2/XSIkbJBjG+gleLYIe3ddymvaQ8TFEQQG7cQi1hEyTeroJ46MNRFeCj2hJ1E\nCWdmaf1qMokohJkurudH1Mm8kGFI1DPBxTjvHF+IpG1AQuc7INmnPXie3lZZgyBW\na7Uddr3xgxLuZwgj1kwwS2P2Sunee2W3EWXovljgvwKBgQD2qs23/vRv0TpVXCTd\nGlGSByUXH9Shg/N9TGJV4ZwAwh/5ZnineNx8t/Z7ultlH+vWO8/wvtDxAL8ZsnR9\nEJSeC5lyW03bx6Wq1ljgOT0KoUdNB00B0TLRgIedYLzAGIQ0FKIy337XZs0a3r/z\nklbyBOdLjPApaPb4MsVvzQovqwKBgQDJO3oHbR1M8lj+JGHsd5LxOSdlkYVl3zB1\nFu7GJUa/We0iIUlBLFfs8+ps+JBSjGbPBhuQKYlyJcC3YbcwL4CSWko7Rmv2m+1u\nb+FQakAawIMnCYkmoyCdRwNgv7AKk5oE89YCNA/N82QogB6Caij1WVMSDv7FZEgb\nSRuFz5brUwKBgQDA1Hvnx/8M3tKsYlFLK8Ty1HURY8fU0BNsM2d4XduX2CoozQur\nWFd9hE7DIMdMAa1bF/0R5gnvLbc2/oQENQ8JkmXNuUTfeG6xY8ms1/I5OiVEOV3g\n+sqwbrsVs8c6oK/RCwRVotREzc+vns0OO6uOnXi3XiFtLepL01z3bqH06wKBgBTb\npl1osPXN1O2axc+l4URBoVTEzafuh25LjzpYmMmyv4KfIqGvv/lemvjqlsMHrIxe\n3LKHq6h6Q0x+w2cqNVB2LWWRehVYujaNQDR+nuBm/fEo6t9nXzUOLEp19ABUpk1H\nHPKjhNPbG5GbHg50hIRR2utvRHcfWt4BKOoox0LjAoGBANq8wnH7nA2pEKKoehun\nic2oHw6TRR1As47uriUjfXEOBeoENkOJOf3W/gM8DQq+Tkwu9RHrQ+U0vEH4FzNX\nvbu1G/XeQUHZqiFKp1qNLEIUqueJ4va7nCS+P9D8EsRhqIUWHu+17ousFhPGNy0n\n84wBKuIBbcjaqFPdY9CN0J4g\n-----END PRIVATE KEY-----\n",
+  "client_email": "alon-new-2022@alon-lavian.iam.gserviceaccount.com",
+  "client_id": "116687323710534251734",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/alon-new-2022%40alon-lavian.iam.gserviceaccount.com"
+}
